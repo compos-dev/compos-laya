@@ -3,7 +3,7 @@
 ;;; Laya answers typed questions about a passage: a choice, a score, a
 ;;; yes or no, with a confidence. It is a 421M decision transformer and
 ;;; not a language model, so no ollama and no OpenAI-shaped server can
-;;; hold it. The daemon is ours: priv/python/laya-daemon.py keeps one
+;;; hold it. The daemon is ours: laya-daemon.py, beside this file, keeps one
 ;;; checkpoint in memory and answers one JSON line a request.
 ;;;
 ;;; The daemon is an endpoint, the editor's own registry of long-lived
@@ -40,7 +40,7 @@ When this file is missing, python3 on PATH answers." 'group 'laya)
 ;; the first question of a cold daemon waits for the weights.
 (define laya-timeout 600000)
 
-(define (laya-script) (priv-path "python/laya-daemon.py"))
+(define (laya-script) (string-append (package-directory "laya") "/laya-daemon.py"))
 
 ;; 'serves "models" is how the model list finds this daemon: it reads the
 ;; endpoint registry and shows every daemon that answers for models, so
